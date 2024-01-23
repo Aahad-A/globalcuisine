@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* Get contact page. */
 router.get('/', function(req, res, next) {
-    res.render('about', { title: 'Contact GlobalCuisine' });
+    res.render('contact', { title: 'Contact GlobalCuisine' });
     });
 
 module.exports = router;
