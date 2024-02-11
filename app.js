@@ -4,11 +4,35 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var layouts = require('express-ejs-layouts'); // Add this line to include the express-ejs-layouts module
+const dotenv = require('dotenv'); // Add this line to include the dotenv module
+dotenv.config();
+
+const mariadb = require('mariadb/callback');
+const db = mariadb.createConnection({
+  host: process.env.DB_HOST, 
+  user: process.env.DB_USER, 
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE, 
+  port: process.env.DB_PORT});
+// connect to database
+db.connect((err) => {
+  if (err) {
+    console.log("Unable to connect to database due to error: " + err);
+    res.render('error');
+  } else {
+    console.log('Connected to database');
+  }
+});
+global.db = db;
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about'); // Add this line to include the about.js file
 var contactRouter = require('./routes/contact'); // Add this line to include the contact.js file
+var privacyRouter = require('./routes/privacy'); // Add this line to include the privacy.js file
+var helpRouter = require('./routes/help'); // Add this line to include the help.js file
+var productRouter = require('./routes/product'); // Add this line to include the product.js file
 const e = require('express');
 
 
@@ -30,6 +54,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter); // Add this line to include the about.js file
 app.use('/contact', contactRouter); // Add this line to include the contact.js file
+app.use('/privacy', privacyRouter); // Add this line to include the privacy.js file
+app.use('/help', helpRouter); // Add this line to include the help.js file
+app.use('/product', productRouter); // Add this line to include the product.js file
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

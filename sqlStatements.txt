@@ -1,0 +1,184 @@
+show databases;
+use gCuisinedb;
+
+CREATE TABLE customer (
+    customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(20) NOT NULL,
+    lastname VARCHAR(20) NOT NULL,
+    email VARCHAR(25) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address1 VARCHAR(50) NOT NULL,
+    address2 VARCHAR(50),
+    city VARCHAR(20) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip VARCHAR(10) NOT NULL,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(2000) NOT NULL
+);
+
+CREATE TABLE restaurant (
+    restaurant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cuisine_type VARCHAR(50) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    delivery_time VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE food_item (
+    food_item_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cuisine_type VARCHAR(50) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    ingredients TEXT NOT NULL,
+    availability BOOLEAN NOT NULL
+);
+
+CREATE TABLE saleorder (
+    order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    saledate DATE NOT NULL,
+    customernotes VARCHAR(500),
+    paymentstatus VARCHAR(10),
+    authorizationnum VARCHAR(10),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE orderdetail (
+    orderdetail_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    saleprice DECIMAL(8,2) NOT NULL,
+    qty INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES saleorder(order_id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE recipe_package (
+    package_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cuisine_type VARCHAR(50) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    ingredients TEXT NOT NULL,
+    shipping_address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE review (
+    review_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    food_item_id INT NULL,
+    package_id INT NULL,
+    rating INT NOT NULL,
+    comment TEXT,
+    date DATE NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY (food_item_id) REFERENCES food_item(food_item_id) ON DELETE SET NULL,
+    FOREIGN KEY (package_id) REFERENCES recipe_package(package_id) ON DELETE SET NULL
+);
+
+CREATE TABLE subscription (
+    subscription_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    category_id INT NOT NULL,
+    subscribedate DATE NOT NULL,
+    unsubscribedate DATE NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE product (
+    product_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    productname VARCHAR(50) NOT NULL,
+    prodimage VARCHAR(50) NOT NULL,
+    description VARCHAR(500) NOT NULL,
+    ingredients VARCHAR(200) NOT NULL,
+    weightdetail VARCHAR(200) NOT NULL,
+    healthwarn VARCHAR(200) NOT NULL,
+    prodcolor VARCHAR(10) NOT NULL,
+    package_id INT NOT NULL,
+    category_id INT NOT NULL,
+    saleprice DECIMAL(8,2) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (package_id) REFERENCES recipe_package(package_id) ON DELETE CASCADE ON UPDATE RESTRICT,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE category (
+category_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+categoryname VARCHAR(50) NOT NULL,
+description VARCHAR(250) NOT NULL
+);
+
+
+
+
+INSERT INTO customer (firstname, lastname, email, phone, address1, address2, city, state, zip, username, password)
+VALUES
+('John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Main St', 'Apt 4', 'Anytown', 'CA', '12345', 'johndoe', 'password123'),
+('Jane', 'Smith', 'jane.smith@example.com', '234-567-8901', '456 Oak St', NULL, 'Othertown', 'TX', '67890', 'janesmith', 'password456'),
+('Alice', 'Johnson', 'alice.johnson@example.com', '345-678-9012', '789 Pine St', '', 'Sometown', 'NY', '23456', 'alicej', 'password789'),
+('Bob', 'Williams', 'bob.williams@example.com', '456-789-0123', '101 Maple Ave', NULL, 'Anycity', 'FL', '34567', 'bobbyw', 'password012'),
+('Charlie', 'Brown', 'charlie.brown@example.com', '567-890-1234', '202 Birch Rd', 'Suite 5', 'Everytown', 'IL', '45678', 'charlieb', 'password345');
+
+
+INSERT INTO category (name, description)
+VALUES
+('American', 'A variety of dishes originating from the United States'),
+('Indian', 'Traditional and flavorful dishes from India'),
+('Italian', 'Classic cuisine from Italy, featuring pasta, pizza, and more'),
+('Japanese', 'Delicate and refined dishes from Japan, including sushi and ramen'),
+('Mexican', 'Spicy and vibrant dishes from Mexico, such as tacos and burritos');
+
+
+INSERT INTO food_item (name, cuisine_type, price, ingredients, availability)
+VALUES
+('Cheeseburger', 'American', 9.99, 'Beef, Cheese, Lettuce, Tomato, Bun', TRUE),
+('Butter Chicken', 'Indian', 11.99, 'Chicken, Butter, Cream, Spices', TRUE),
+('Spaghetti Carbonara', 'Italian', 12.99, 'Pasta, Eggs, Pork, Cheese', TRUE),
+('California Roll', 'Japanese', 8.99, 'Rice, Nori, Crab, Avocado, Cucumber', TRUE),
+('Fish Taco', 'Mexican', 10.99, 'Fish, Cilantro, Lime, Tortilla', TRUE);
+
+
+INSERT INTO product (productname, prodimage, description, ingredients, weightdetail, healthwarn, prodcolor, package_id, category_id, saleprice, status)
+VALUES
+('Organic Apple', 'apple.jpg', 'Fresh organic apple', 'Apples', '1 lb', 'None', 'Red', 1, 1, 2.99, 'Available'),
+('Basmati Rice', 'rice.jpg', 'Premium basmati rice', 'Rice', '2 lbs', 'None', 'White', 2, 2, 5.99, 'Available'),
+('Pasta', 'pasta.jpg', 'Italian pasta', 'Wheat, Egg', '1 lb', 'Contains gluten', 'Yellow', 3, 3, 1.99, 'Available'),
+('Soy Sauce', 'soy.jpg', 'Authentic Japanese soy sauce', 'Soybeans, Water, Salt', '500ml', 'Contains soy', 'Black', 4, 4, 3.99, 'Available'),
+('Tortilla Wraps', 'tortilla.jpg', 'Corn tortilla wraps', 'Corn flour', '1 lb', 'Gluten-free', 'Yellow', 5, 5, 2.49, 'Available');
+
+
+INSERT INTO saleorder (customer_id, saledate, customernotes, paymentstatus, authorizationnum)
+VALUES
+(1, CURDATE(), 'Leave at door', 'Paid', 'AUTH123'),
+(2, CURDATE(), 'Ring bell', 'Paid', 'AUTH456'),
+(3, CURDATE(), '', 'Paid', 'AUTH789'),
+(4, CURDATE(), 'Call on arrival', 'Paid', 'AUTH012'),
+(5, CURDATE(), '', 'Paid', 'AUTH345');
+
+
+INSERT INTO orderdetail (order_id, product_id, saleprice, qty)
+VALUES
+(1, 1, 9.99, 2),
+(2, 2, 11.99, 1),
+(3, 3, 12.99, 3),
+(4, 4, 8.99, 1),
+(5, 5, 10.99, 2);
+
+
+INSERT INTO review (customer_id, food_item_id, rating, comment, date)
+VALUES
+(1, 1, 5, 'Delicious burger!', CURDATE()),
+(2, 2, 4, 'Very tasty, would order again.', CURDATE()),
+(3, 3, 5, 'Authentic and creamy!', CURDATE()),
+(4, 4, 4, 'Fresh and satisfying.', CURDATE()),
+(5, 5, 5, 'Best tacos ever!', CURDATE());
+
+
+INSERT INTO recipe_package (name, cuisine_type, price, ingredients, shipping_address)
+VALUES
+('Italian Night', 'Italian', 29.99, 'Pasta, Tomato Sauce, Olive Oil, Parmesan', '123 Main St, Anytown, CA'),
+('Taco Kit', 'Mexican', 19.99, 'Tortillas, Beef, Salsa, Cheese', '456 Oak St, Othertown, TX'),
+('Sushi Set', 'Japanese', 34.99, 'Rice, Nori, Fish, Soy Sauce', '789 Pine St, Sometown, NY'),
+('BBQ Bonanza', 'American', 39.99, 'Ribs, BBQ Sauce, Corn, Buns', '101 Maple Ave, Anycity, FL'),
+('Indian Feast', 'Indian', 31.99, 'Curry Powder, Chicken, Rice, Naan Bread', '202 Birch Rd, Everytown, IL');
+
