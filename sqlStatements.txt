@@ -108,6 +108,13 @@ categoryname VARCHAR(50) NOT NULL,
 description VARCHAR(250) NOT NULL
 );
 
+CREATE TABLE restaurant (
+    restaurant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cuisine_type VARCHAR(50) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    delivery_time VARCHAR(50) NOT NULL
+);
 
 
 
@@ -136,6 +143,8 @@ VALUES
 ('Spaghetti Carbonara', 'Italian', 12.99, 'Pasta, Eggs, Pork, Cheese', TRUE),
 ('California Roll', 'Japanese', 8.99, 'Rice, Nori, Crab, Avocado, Cucumber', TRUE),
 ('Fish Taco', 'Mexican', 10.99, 'Fish, Cilantro, Lime, Tortilla', TRUE);
+
+customer, food_item, category, product, saleorder, orderdetail, review, recipe_package
 
 
 INSERT INTO product (productname, prodimage, description, ingredients, weightdetail, healthwarn, prodcolor, package_id, category_id, saleprice, status)
@@ -181,4 +190,13 @@ VALUES
 ('Sushi Set', 'Japanese', 34.99, 'Rice, Nori, Fish, Soy Sauce', '789 Pine St, Sometown, NY'),
 ('BBQ Bonanza', 'American', 39.99, 'Ribs, BBQ Sauce, Corn, Buns', '101 Maple Ave, Anycity, FL'),
 ('Indian Feast', 'Indian', 31.99, 'Curry Powder, Chicken, Rice, Naan Bread', '202 Birch Rd, Everytown, IL');
+
+INSERT INTO restaurant (name, cuisine_type, location, delivery_time)
+VALUES
+('Good Eats', 'American', '123 Main St, Anytown, CA', '30 mins'),
+('Curry House', 'Indian', '456 Oak St, Othertown, TX', '45 mins'),
+('Pasta Central', 'Italian', '789 Pine St, Sometown, NY', '40 mins'),
+('Sushi World', 'Japanese', '101 Maple Ave, Anycity, FL', '50 mins'),
+('Taco Land', 'Mexican', '202 Birch Rd, Everytown, IL', '35 mins');
+
 

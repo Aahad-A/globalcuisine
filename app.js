@@ -32,7 +32,14 @@ var aboutRouter = require('./routes/about'); // Add this line to include the abo
 var contactRouter = require('./routes/contact'); // Add this line to include the contact.js file
 var privacyRouter = require('./routes/privacy'); // Add this line to include the privacy.js file
 var helpRouter = require('./routes/help'); // Add this line to include the help.js file
-var productRouter = require('./routes/product'); // Add this line to include the product.js file
+var productRouter = require('./routes/product'); // 
+var customerRouter = require('./routes/customer'); // Add this line to include the customer.js file
+var categoryRouter = require('./routes/category'); // Add this line to include the category.js file
+var foodRouter = require('./routes/food_item'); // Add this line to include the food.js file
+var orderdetailRouter = require('./routes/orderdetail'); // Add this line to include the orderdetail.js file
+var recipeRouter = require('./routes/recipe_package')
+var reviewRouter = require('./routes/review')
+var restaurantRouter = require('./routes/restaurant')
 const e = require('express');
 
 
@@ -56,7 +63,15 @@ app.use('/about', aboutRouter); // Add this line to include the about.js file
 app.use('/contact', contactRouter); // Add this line to include the contact.js file
 app.use('/privacy', privacyRouter); // Add this line to include the privacy.js file
 app.use('/help', helpRouter); // Add this line to include the help.js file
-app.use('/product', productRouter); // Add this line to include the product.js file
+app.use('/product', productRouter); // 
+app.use('/customer', customerRouter); // 
+app.use('/category', categoryRouter); // 
+app.use('/food_item', foodRouter); // 
+app.use('/orderdetail', orderdetailRouter); // 
+app.use('/recipe_package', recipeRouter); // Add this line to include the recipe.js file
+app.use('/review', reviewRouter); // Add this line to include the review.js file
+app.use('/restaurant', restaurantRouter); // Add this line to include the restaurant.js file
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

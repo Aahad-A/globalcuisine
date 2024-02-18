@@ -1,0 +1,10 @@
+<h1> Food Item Details </h1>
+<table>
+    <!-- food_item_id, name, cuisine_type, ingredients, price, availability -->
+    <tr> <td> Food Item ID: </td> <td> <%= onerec.food_item_id %> </td> </tr>
+    <tr> <td> Name: </td> <td> <%= onerec.name %> </td> </tr>
+    <tr> <td> Cuisine Type: </td> <td> <%= onerec.cuisine_type %> </td> </tr>
+    <tr> <td> Ingredients: </td> <td> <%= onerec.ingredients %> </td> </tr>
+    <tr> <td> Price: </td> <td> <%= onerec.price %> </td> </tr>
+    <tr> <td> Availability: </td> <td> <%= onerec.availability ? 'Available' : 'Not Available' %> </td> </tr>
+</table>

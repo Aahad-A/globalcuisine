@@ -22,12 +22,7 @@
     <td><%= recref.status %></td>
     <td><a href="/product/<%= recref.product_id %>/show">Details</a></td>
     <td><a href="/product/<%= recref.product_id %>/edit">Edit</a></td>
-    <td>
-      <a
-        href="/product/<%= recref.product_id %>/delete"
-        onclick="return confirm('Are you sure you want to delete this record?');"
-        >Delete</a
-      >
+    <td><a href="/product/<%= recref.product_id %>/delete" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
     </td>
   </tr>
   <% }); %>

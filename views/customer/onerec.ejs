@@ -1,0 +1,30 @@
+<h1> Details </h1>
+<table>  <!-- productname, description, ingredients, package_id, category_id, saleprice, status -->
+    <tr> <td> Customer ID: </td> <td> <%= onerec.customer_id %> </td> </tr>
+    <tr> <td> First Name: </td> <td> <%= onerec.firstname %> </td> </tr>
+    <tr> <td> Last Name: </td> <td> <%= onerec.lastname %> </td> </tr>
+    <tr> <td> Email: </td> <td> <%= onerec.email %> </td> </tr>
+    <tr> <td> Phone: </td> <td> <%= onerec.phone %> </td> </tr>
+    <tr> <td> Address1: </td> <td> <%= onerec.address1 %> </td> </tr>
+    <tr> <td> Address2: </td> <td> <%= onerec.address2 %> </td> </tr>
+    <tr> <td> City: </td> <td> <%= onerec.city %> </td> </tr>
+    <tr> <td> State: </td> <td> <%= onerec.state %> </td> </tr>
+    <tr> <td> Zip: </td> <td> <%= onerec.zip %> </td> </tr>
+    <tr> <td> username: </td> <td> <%= onerec.username %> </td> </tr>
+    <!-- <tr> <td> password: </td> <td> <%= onerec.password %> </td> </tr> -->
+</table>
+
+<!-- CREATE TABLE customer (
+    customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(20) NOT NULL,
+    lastname VARCHAR(20) NOT NULL,
+    email VARCHAR(25) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address1 VARCHAR(50) NOT NULL,
+    address2 VARCHAR(50),
+    city VARCHAR(20) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip VARCHAR(10) NOT NULL,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(2000) NOT NULL
+); -->

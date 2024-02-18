@@ -1,0 +1,11 @@
+<h1> Review Details </h1>
+<table>
+    <!-- review_id, customer_id, food_item_id, package_id, rating, comment, date -->
+    <tr> <td> Review ID: </td> <td> <%= onerec.review_id %> </td> </tr>
+    <tr> <td> Customer ID: </td> <td> <%= onerec.customer_id %> </td> </tr>
+    <tr> <td> Food Item ID: </td> <td> <%= onerec.food_item_id ? onerec.food_item_id : 'N/A' %> </td> </tr>
+    <tr> <td> Package ID: </td> <td> <%= onerec.package_id ? onerec.package_id : 'N/A' %> </td> </tr>
+    <tr> <td> Rating: </td> <td> <%= onerec.rating %> </td> </tr>
+    <tr> <td> Comment: </td> <td> <%= onerec.comment %> </td> </tr>
+    <tr> <td> Date: </td> <td> <%= onerec.date %> </td> </tr>
+</table>
