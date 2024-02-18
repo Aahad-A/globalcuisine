@@ -1,0 +1,12 @@
+<h1> Edit Recipe Package </h1>
+<form action="/recipe_package/save" method="post">
+    <input type="hidden" name="package_id" value="<%= onerec.package_id %>" >
+    <table>
+        <tr> <td> Name: </td> <td> <input type="text" name="name" value="<%= onerec.name %>" required> </td> </tr>
+        <tr> <td> Cuisine Type: </td> <td> <input type="text" name="cuisine_type" value="<%= onerec.cuisine_type %>"> </td> </tr>
+        <tr> <td> Price: </td> <td> <input type="text" name="price" value="<%= onerec.price %>"> </td> </tr>
+        <tr> <td> Ingredients: </td> <td> <textarea name="ingredients" rows="4" cols="30"><%= onerec.ingredients %></textarea> </td> </tr>
+        <tr> <td> Shipping Address: </td> <td> <input type="text" name="shipping_address" value="<%= onerec.shipping_address %>"> </td> </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>

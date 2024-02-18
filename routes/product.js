@@ -78,10 +78,40 @@ router.get('/:recordid/delete', function (req, res, next) {
     });
 });
 
+// ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function (req, res, next) {
+    let query = "SELECT product_id, productname, prodimage, description, ingredients, package_id, category_id, saleprice, status FROM product WHERE product_id = " + req.params.recordid;
+    // execute query
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.render('product/editrec', { onerec: result[0] });
+        }
+    });
+});
 
+// ==================================================
+// Route to save edited data in database.
+// ==================================================
+router.post('/save', function (req, res, next) {
+    let updatequery = "UPDATE product SET productname = ?, prodimage = ?, description = ?, ingredients = ?, weightdetail = ?, healthwarn = ?, prodcolor = ?, package_id = ?, category_id = ?, saleprice = ?, status = ? WHERE product_id = " 
+    + req.body.product_id;
 
-
-
+    db.query(updatequery, [req.body.productname, req.body.prodimage, req.body.description,
+    req.body.ingredients, req.body.weightdetail, req.body.healthwarn, req.body.prodcolor,
+    req.body.package_id, req.body.category_id, req.body.saleprice, req.body.status], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.redirect('/product');
+        }
+    });
+});
 
 
 module.exports = router;

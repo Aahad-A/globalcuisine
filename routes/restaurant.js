@@ -75,4 +75,42 @@ router.get('/:recordid/delete', function (req, res, next) {
     });
 });
 
+// ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function (req, res, next) {
+    let query = "SELECT restaurant_id, name, cuisine_type, location, delivery_time FROM restaurant WHERE restaurant_id = ?";
+    // execute query with parameter to prevent SQL injection
+    db.query(query, [req.params.recordid], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.render('restaurant/editrec', { onerec: result[0] });
+        }
+    });
+});
+
+// ==================================================
+// Route to save edited data in the database.
+// ==================================================
+router.post('/save', function (req, res, next) {
+    // restaurant_id, name, cuisine_type, location, delivery_time
+    let updatequery = "UPDATE restaurant SET name = ?, cuisine_type = ?, location = ?, delivery_time = ? WHERE restaurant_id = ?";
+    
+    db.query(updatequery, [
+        req.body.name, req.body.cuisine_type, req.body.location, req.body.delivery_time, req.body.restaurant_id, req.body.restaurant_id
+    ], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.redirect('/restaurant');
+        }
+    });
+});
+
+
+
+
 module.exports = router;

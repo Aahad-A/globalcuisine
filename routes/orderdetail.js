@@ -75,4 +75,41 @@ router.get('/:recordid/delete', function (req, res, next) {
     });
 });
 
+
+// ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function (req, res, next) {
+    let query = "SELECT orderdetail_id, order_id, product_id, saleprice, qty FROM orderdetail WHERE orderdetail_id = ?";
+    // execute query with parameter to prevent SQL injection
+    db.query(query, [req.params.recordid], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.render('orderdetail/editrec', { onerec: result[0] });
+        }
+    });
+});
+
+// ==================================================
+// Route to save edited data in the database.
+// ==================================================
+router.post('/save', function (req, res, next) {
+    let updatequery = "UPDATE orderdetail SET orderdetail_id=?, order_id=?, product_id=?, saleprice=?, qty=? WHERE orderdetail_id = ?";
+    
+    db.query(updatequery, [
+        req.body.order_id, req.body.product_id, req.body.saleprice,
+        req.body.qty, req.body.orderdetail_id
+    ], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.redirect('/orderdetail');
+        }
+    });
+});
+
+
 module.exports = router;

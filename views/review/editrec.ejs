@@ -1,0 +1,21 @@
+<h1> Edit Review </h1>
+<form action="/review/save" method="post">
+    <input type="hidden" name="review_id" value="<%= onerec.review_id %>" >
+    <table>
+        <tr> <td> Customer ID: </td> <td> <input type="number" name="customer_id" value="<%= onerec.customer_id %>" required> </td> </tr>
+        <tr> <td> Food Item ID: </td> <td> <input type="number" name="food_item_id" value="<%= onerec.food_item_id %>"> </td> </tr>
+        <tr> <td> Package ID: </td> <td> <input type="number" name="package_id" value="<%= onerec.package_id %>"> </td> </tr>
+        <tr> <td> Rating: </td> <td> 
+            <select name="rating" required>
+                <option value="1" <% if (onerec.rating === '1') { %> selected <% } %>>1</option>
+                <option value="2" <% if (onerec.rating === '2') { %> selected <% } %>>2</option>
+                <option value="3" <% if (onerec.rating === '3') { %> selected <% } %>>3</option>
+                <option value="4" <% if (onerec.rating === '4') { %> selected <% } %>>4</option>
+                <option value="5" <% if (onerec.rating === '5') { %> selected <% } %>>5</option>
+            </select> 
+        </td> </tr>
+        <tr> <td> Comment: </td> <td> <textarea name="comment" rows="4" cols="30"><%= onerec.comment %></textarea> </td> </tr>
+        <tr> <td> Date: </td> <td> <input type="date" name="date" value="<%= onerec.date %>"> </td> </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>

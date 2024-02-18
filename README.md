@@ -7,6 +7,9 @@ To create a new view:
 3. Add a new link to the `app.js` file.
 
 
+##
+Food Table
+
 ## To connect to Database:
 
 ### Login to Eagle Server

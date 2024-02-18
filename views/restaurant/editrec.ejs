@@ -1,0 +1,11 @@
+<h1> Edit Restaurant </h1>
+<form action="/restaurant/save" method="post">
+    <input type="hidden" name="restaurant_id" value="<%= onerec.restaurant_id %>" >
+    <table>
+        <tr> <td> Restaurant Name: </td> <td> <input type="text" name="name" value="<%= onerec.name %>" required> </td> </tr>
+        <tr> <td> Cuisine Type: </td> <td> <input type="text" name="cuisine_type" value="<%= onerec.cuisine_type %>"> </td> </tr>
+        <tr> <td> Location: </td> <td> <input type="text" name="location" value="<%= onerec.location %>"> </td> </tr>
+        <tr> <td> Delivery Time: </td> <td> <input type="text" name="delivery_time" value="<%= onerec.delivery_time %>"> </td> </tr>
+    </table>
+    <button type="submit">Save</button>
+</form>

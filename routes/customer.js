@@ -76,4 +76,42 @@ router.get('/:recordid/delete', function (req, res, next) {
     });
 });
 
+// ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function (req, res, next) {
+    let query = "SELECT firstname, lastname, email, phone, address1, address2, city, state, zip, username, password FROM customer WHERE customer_id = ?";
+    // execute query with parameter to prevent SQL injection
+    db.query(query, [req.params.recordid], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.render('customer/editrec', { onerec: result[0] });
+        }
+    });
+});
+
+// ==================================================
+// Route to save edited data in the database.
+// ==================================================
+router.post('/save', function (req, res, next) {
+    let updatequery = "UPDATE customer SET firstname = ?, lastname = ?, email = ?, phone = ?, address1 = ?, address2 = ?, city = ?, state = ?, zip = ?, username = ?, password = ? WHERE customer_id = ?";
+    
+    db.query(updatequery, [
+        req.body.firstname, req.body.lastname, req.body.email,
+        req.body.phone, req.body.address1, req.body.address2,
+        req.body.city, req.body.state, req.body.zip,
+        req.body.username, req.body.password, req.body.customer_id
+    ], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.redirect('/customer');
+        }
+    });
+});
+
+
 module.exports = router;

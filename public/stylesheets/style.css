@@ -1,15 +1,16 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f5deb3; /* Warm beige background */
 }
 
 a {
-  color: #00B7FF;
+  color: #e25822; /* Orange link color */
 }
 
-h1{
+h1 {
   font-family: Arial, sans-serif;
-  color: red;
+  color: #c71585; /* Deep pink heading color */
 }
 
 img {
@@ -28,7 +29,7 @@ ul {
   padding: 0;
   overflow: hidden;
   border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  background-color: #ffe4b5; /* Lighter orange background */
 }
 
 li {
@@ -37,37 +38,35 @@ li {
 
 li a {
   display: block;
-  color: #666;
+  color: #8b4513; /* Saddle brown link color */
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover:not(.active) {
-  background-color: #ddd;
+  background-color: #d2b48c; /* Tan background on hover */
 }
 
 li a.active {
   color: white;
-  background-color: #4CAF50;
+  background-color: #cd5c5c; /* Indian red active background */
 }
 
 .button1 {
-  background-color: #008CBA;
+  background-color: #d2691e; /* Chocolate button color */
   font-size: 10px;
   border-radius: 4px;
-  border: 2px solid #4CAF50;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  border: 2px solid #8b4513; /* Saddle brown border */
   transition-duration: 0.4s;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0
-  17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-product {
+.product {
   margin: 5px;
   border: 2px solid #ccc;
   float: left;
-  background: #ffffe6;
+  background: #ffcc66; /* Light orange background */
   box-shadow: 5px 5px 2px #888888;
   min-width: 200px;
   max-width: 200px;

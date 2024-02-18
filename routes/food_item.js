@@ -73,4 +73,39 @@ router.get('/:recordid/delete', function (req, res, next) {
     });
 });
 
+// ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function (req, res, next) {
+    let query = "SELECT food_item_id, name, cuisine_type, price, ingredients, availability FROM food_item WHERE food_item_id = ?";
+    // execute query with parameter to prevent SQL injection
+    db.query(query, [req.params.recordid], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.render('food_item/editrec', { onerec: result[0] });
+        }
+    });
+});
+
+// ==================================================
+// Route to save edited data in the database.
+// ==================================================
+router.post('/save', function (req, res, next) {
+    let updatequery = "UPDATE food_item_id=?, name=?, cuisine_type=?, price=?, ingredients=?, availability=? WHERE food_item_id = ?";
+    
+    db.query(updatequery, [
+        req.body.name, req.body.description, req.body.price, req.body.category_id, req.body.food_item_id
+    ], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.render('error');
+        } else {
+            res.redirect('/food_item');
+        }
+    });
+});
+
+
 module.exports = router;
