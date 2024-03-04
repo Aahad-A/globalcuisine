@@ -18,7 +18,16 @@
                 <option>Available</option>
                 <option>Contingent</option>
                 <option>Coming Soon</option>
-</select> </td> </tr>
+                </select> </td> </tr>
+    <tr> <td> Homepage?: </td> <td>
+
+        <% if (onerec.homepage) { %>
+            <input type="checkbox" name="homepage" checked >
+        <% } else { %>
+            <input type="checkbox" name="homepage">
+        <% } %>
+        
+        </td> </tr>
 </table>
 <button type="submit">Save</button>
 </form>

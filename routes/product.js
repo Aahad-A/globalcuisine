@@ -4,7 +4,7 @@ var router = express.Router();
 // Route to list all records. Display view to list all records
 // ==================================================
 router.get('/', function (req, res, next) {
-    let query = "SELECT product_id, productname, description, ingredients, package_id, category_id, saleprice, status FROM product";
+    let query = "SELECT product_id, productname, description, ingredients, package_id, category_id, saleprice, status, homepage FROM product";
     // execute query
     db.query(query, (err, result) => {
         if (err) {
@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 // URL: http://localhost:3003/product/1/show
 // ==================================================
 router.get('/:recordid/show', function (req, res, next) {
-    let query = "SELECT product_id, productname, prodimage, description, ingredients, package_id, category_id, saleprice, status FROM product WHERE product_id = " + req.params.recordid;
+    let query = "SELECT product_id, productname, prodimage, description, ingredients, package_id, category_id, saleprice, status, homepage FROM product WHERE product_id = " + req.params.recordid;
     // execute query
     db.query(query, (err, result) => {
         if (err) {
@@ -45,13 +45,19 @@ router.get('/addrecord', function (req, res, next) {
 // Route to obtain user input and save in database.
 // ==================================================
 router.post('/', function (req, res, next) {
-    let insertquery = "INSERT INTO product (productname,prodimage, description, ingredients, weightdetail, healthwarn, prodcolor, package_id, category_id, saleprice, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    var homepage_value = 0;
+    if (req.body.homepage) {
+        homepage_value = 1;
+    }
+    
+    let insertquery = "INSERT INTO product (productname,prodimage, description, ingredients, weightdetail, healthwarn, prodcolor, package_id, category_id, saleprice, status, homepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
    
 
     db.query(insertquery, [req.body.productname, req.body.prodimage, req.body.description,
     req.body.ingredients, req.body.weightdetail, req.body.healthwarn, req.body.prodcolor,
-    req.body.package_id, req.body.category_id, req.body.saleprice, req.body.status], (err, result) => {
+    req.body.package_id, req.body.category_id, req.body.saleprice, req.body.status, homepage_value],(err, result) => {
         if (err) {
             console.log(err);
             res.render('error');
@@ -82,7 +88,8 @@ router.get('/:recordid/delete', function (req, res, next) {
 // Route to edit one specific record.
 // ==================================================
 router.get('/:recordid/edit', function (req, res, next) {
-    let query = "SELECT product_id, productname, prodimage, description, ingredients, package_id, category_id, saleprice, status FROM product WHERE product_id = " + req.params.recordid;
+
+    let query = "SELECT product_id, productname, prodimage, description, ingredients, package_id, category_id, saleprice, status, homepage FROM product WHERE product_id = " + req.params.recordid;
     // execute query
     db.query(query, (err, result) => {
         if (err) {
@@ -98,12 +105,18 @@ router.get('/:recordid/edit', function (req, res, next) {
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function (req, res, next) {
-    let updatequery = "UPDATE product SET productname = ?, prodimage = ?, description = ?, ingredients = ?, weightdetail = ?, healthwarn = ?, prodcolor = ?, package_id = ?, category_id = ?, saleprice = ?, status = ? WHERE product_id = " 
+    
+    var homepage_value = 0;
+    if (req.body.homepage) {
+        homepage_value = 1;
+    }
+    
+    let updatequery = "UPDATE product SET productname = ?, prodimage = ?, description = ?, ingredients = ?, weightdetail = ?, healthwarn = ?, prodcolor = ?, package_id = ?, category_id = ?, saleprice = ?, status = ?, homepage = ? WHERE product_id = " 
     + req.body.product_id;
 
     db.query(updatequery, [req.body.productname, req.body.prodimage, req.body.description,
     req.body.ingredients, req.body.weightdetail, req.body.healthwarn, req.body.prodcolor,
-    req.body.package_id, req.body.category_id, req.body.saleprice, req.body.status], (err, result) => {
+    req.body.package_id, req.body.category_id, req.body.saleprice, req.body.status, homepage_value], (err, result) => {
         if (err) {
             console.log(err);
             res.render('error');

@@ -40,6 +40,8 @@ var orderdetailRouter = require('./routes/orderdetail'); // Add this line to inc
 var recipeRouter = require('./routes/recipe_package')
 var reviewRouter = require('./routes/review')
 var restaurantRouter = require('./routes/restaurant')
+var searchRouter = require('./routes/search')
+var reportsRouter = require('./routes/report')
 const e = require('express');
 
 
@@ -71,7 +73,8 @@ app.use('/orderdetail', orderdetailRouter); //
 app.use('/recipe_package', recipeRouter); // Add this line to include the recipe.js file
 app.use('/review', reviewRouter); // Add this line to include the review.js file
 app.use('/restaurant', restaurantRouter); // Add this line to include the restaurant.js file
-
+app.use('/search', searchRouter); // Add this line to include the search.js file
+app.use('/report', reportsRouter); // Add this line to include the report.js file
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

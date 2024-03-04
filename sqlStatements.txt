@@ -199,4 +199,30 @@ VALUES
 ('Sushi World', 'Japanese', '101 Maple Ave, Anycity, FL', '50 mins'),
 ('Taco Land', 'Mexican', '202 Birch Rd, Everytown, IL', '35 mins');
 
+CREATE TABLE promotion (
+promotion_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+promotitle VARCHAR(50) NOT NULL,
+promoimage VARCHAR(20) NOT NULL,
+description VARCHAR(200) NOT NULL,
+startdate DATE NOT NULL,
+enddate DATE NOT NULL,
+discountrate DECIMAL(5,2)
+);
 
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Summer Sale', 'summer_sale.jpg', 'Get ready for summer with our exclusive discounts!', '2024-06-01', '2024-06-30', 10.00);
+
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Back to School', 'back_to_school.jpg', 'Gear up for the new school year with our special offers!', '2024-08-15', '2024-09-15', 15.50);
+
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Holiday Season Sale', 'holiday_sale.jpg', 'Celebrate the holiday season with huge discounts!', '2024-11-25', '2024-12-31', 20.00);
+
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Spring Clearance', 'spring_clearance.jpg', 'Out with the old, in with the new! Enjoy clearance prices on select items.', '2024-03-3', '2024-04-15', 25.75);
+
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Black Friday', 'black_friday.jpg', 'Don\'t miss out on the biggest sale of the year! Exclusive deals await you.', '2024-11-29', '2024-11-30', 30.00);
+
+INSERT INTO promotion (promotitle, promoimage, description, startdate, enddate, discountrate)
+VALUES ('Children's Day Sale', 'childrensday2024.jpg', 'DEALS DEALS DEALS TODAY!', '2024-2-10', '2024-2-30', 30.00);
