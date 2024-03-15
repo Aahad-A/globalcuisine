@@ -6,6 +6,7 @@ var logger = require('morgan');
 var layouts = require('express-ejs-layouts'); // Add this line to include the express-ejs-layouts module
 const dotenv = require('dotenv'); // Add this line to include the dotenv module
 dotenv.config();
+var session = require('express-session'); 
 
 const mariadb = require('mariadb/callback');
 const db = mariadb.createConnection({
@@ -42,16 +43,25 @@ var reviewRouter = require('./routes/review')
 var restaurantRouter = require('./routes/restaurant')
 var searchRouter = require('./routes/search')
 var reportsRouter = require('./routes/report')
+var catalogRouter = require('./routes/catalog')
+var saleRouter = require('./routes/saleorder')
 const e = require('express');
 
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(layouts); // Add this line to include the express-ejs-layouts module
+
+app.use(session({secret: 'gCuisineAppSecret'}));
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -75,6 +85,9 @@ app.use('/review', reviewRouter); // Add this line to include the review.js file
 app.use('/restaurant', restaurantRouter); // Add this line to include the restaurant.js file
 app.use('/search', searchRouter); // Add this line to include the search.js file
 app.use('/report', reportsRouter); // Add this line to include the report.js file
+app.use('/catalog', catalogRouter); // Add this line to include the catelog.js file
+app.use('/saleorder', saleRouter); // Add this line to include the saleorder.js file
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
