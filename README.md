@@ -1,25 +1,21 @@
-# globalcuisine
+# GlobalCuisine
 
-To create a new view:
+## Overview
+This project is an e-commerce website designed to provide a seamless shopping experience. It features user authorization for secure access, a comprehensive database for product and user data management, and a robust back-end built using Express.js in a Node.js environment. I'm working on deploying it...AWS or...?
 
-1. Create a new file in the `views` directory.
-2. Add a new route to the `app.js` file.
-3. Add a new link to the `app.js` file.
-
-
-##
-Food Table
-
-## To connect to Database:
-
-### Login to Eagle Server
-
-```ssh aabubak2@eagle.cdm.depaul.edu```
-
-### MariaDB Database Connection
-
-```mysql -u aabubak2 -p``` 
-Password: aabubak2
-
- 
-use gCuisineDB;
+## Features
+User Authorization: Secure sign-up and login functionality with password encryption for user safety.
+Product Management: Users can browse, search, and purchase products. Admin users can add, edit, or remove listings.
+Shopping Cart: Integrated shopping cart for easy product selection and checkout process.
+Order History: Users can view their purchase history and track order status.
+Database Integration: Utilizes MariaDB for storing and managing user and product data efficiently.
+## Technologies Used
+Frontend: HTML, CSS, JavaScript 
+Backend: Node.js with Express.js framework 
+Database: MariaDB for data storage and management
+## Setup and Installation
+Clone the repository to your local machine.
+Navigate to the project directory and install dependencies: 'npm install'.
+Set up MariaDB on your local machine and configure the database settings in the project (inside sqlstatements.txt)
+Start the server with 'nodemon start'
+Access the website through http://localhost:3005.
